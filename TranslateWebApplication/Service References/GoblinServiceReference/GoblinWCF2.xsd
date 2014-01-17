@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.Pub" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.Pub" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Entities" />
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" />
+  <xs:complexType name="DataListOfTranslatedTextxBHmhEPe">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="DataListOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.Pub" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="TranslatedText" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Entities" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Entities" minOccurs="0" name="Content" nillable="true" type="q1:ArrayOfTranslatedText" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataListOfTranslatedTextxBHmhEPe" nillable="true" type="tns:DataListOfTranslatedTextxBHmhEPe" />
+  <xs:complexType name="ChangeSourceInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddedCount" type="xs:int" />
+      <xs:element minOccurs="0" name="EditedCount" type="xs:int" />
+      <xs:element minOccurs="0" name="RemovedCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChangeSourceInfo" nillable="true" type="tns:ChangeSourceInfo" />
+  <xs:complexType name="DataListOfTextByLangwFXowe_P_S">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="DataListOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.Pub" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="TextByLang" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" minOccurs="0" name="Content" nillable="true" type="q2:ArrayOfTextByLang" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataListOfTextByLangwFXowe_P_S" nillable="true" type="tns:DataListOfTextByLangwFXowe_P_S" />
+  <xs:complexType name="DataListOfTextByIdwFXowe_P_S">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="DataListOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.Pub" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="TextById" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" minOccurs="0" name="Content" nillable="true" type="q3:ArrayOfTextById" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataListOfTextByIdwFXowe_P_S" nillable="true" type="tns:DataListOfTextByIdwFXowe_P_S" />
+  <xs:complexType name="DataListOfTranslatedItemwFXowe_P_S">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="DataListOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.Pub" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="TranslatedItem" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" minOccurs="0" name="Content" nillable="true" type="q4:ArrayOfTranslatedItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataListOfTranslatedItemwFXowe_P_S" nillable="true" type="tns:DataListOfTranslatedItemwFXowe_P_S" />
+  <xs:complexType name="ArrayOfKeyValueOfstringstring">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringstring" nillable="true" type="tns:KeyValueOfstringstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfstringstring" nillable="true" type="tns:ArrayOfKeyValueOfstringstring" />
+  <xs:complexType name="KeyValueOfstringstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="KeyValueOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.Pub" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="KeyValueOfstringstring" nillable="true" type="tns:KeyValueOfstringstring" />
+</xs:schema>

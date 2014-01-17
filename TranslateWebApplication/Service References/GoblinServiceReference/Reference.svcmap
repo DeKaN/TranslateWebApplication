@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="00564cae-c90e-4e8f-940f-a43f31dd7ca2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://goblin.localization.dev.joker.opentao.net/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GoblinWCF.xsd" MetadataType="Schema" ID="f7dd7296-c5f8-4bfc-b75e-27f0aa4c5124" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd1" />
+    <MetadataFile FileName="GoblinWCF1.xsd" MetadataType="Schema" ID="e04250cb-5d8f-45ef-bf69-bc2a01bdee77" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd9" />
+    <MetadataFile FileName="GoblinWCF2.xsd" MetadataType="Schema" ID="8f0b3652-d9d3-4b2c-be52-1d39dd46f942" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd10" />
+    <MetadataFile FileName="GoblinWCF3.xsd" MetadataType="Schema" ID="be602e61-4b89-4a0a-aa08-5aa0e3d7d9e7" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd7" />
+    <MetadataFile FileName="GoblinWCFService.wsdl" MetadataType="Wsdl" ID="c1d8ad11-3772-4e3a-bbcf-4a8ff08cf51b" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?wsdl" />
+    <MetadataFile FileName="GoblinWCF.disco" MetadataType="Disco" ID="7bfa9204-f499-486f-9385-2e7fa016603b" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?disco" />
+    <MetadataFile FileName="GoblinWCF4.xsd" MetadataType="Schema" ID="a423b1a3-17ac-422d-b4f6-df2de50adeba" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd3" />
+    <MetadataFile FileName="GoblinWCF5.xsd" MetadataType="Schema" ID="0e7539a4-cb94-40f9-b734-728572a2e3b3" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd8" />
+    <MetadataFile FileName="GoblinWCF6.xsd" MetadataType="Schema" ID="7f6e7871-bdb3-4981-97ef-1ce6d9a4b037" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd4" />
+    <MetadataFile FileName="GoblinWCF7.xsd" MetadataType="Schema" ID="82f2daa4-6a87-4efb-afa6-c8d634a987a9" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd11" />
+    <MetadataFile FileName="GoblinWCF8.xsd" MetadataType="Schema" ID="519eafb3-ab8f-48ef-a3ca-737b5f8b1921" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd6" />
+    <MetadataFile FileName="GoblinWCF9.xsd" MetadataType="Schema" ID="4553d760-22d2-42ed-98f4-ec8169ccedf3" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd0" />
+    <MetadataFile FileName="GoblinWCF10.xsd" MetadataType="Schema" ID="e418801b-91cc-4a12-81bf-5173ba06eb37" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd5" />
+    <MetadataFile FileName="GoblinWCF11.xsd" MetadataType="Schema" ID="10ecacbb-007a-4ee5-9c3a-9a680f8adeaa" SourceId="1" SourceUrl="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

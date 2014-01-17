@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Backbone.Dispatching.ServiceModel.Pub.Types.Answers" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Backbone.Dispatching.ServiceModel.Pub.Types.Answers" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Debug.Pub" />
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.Stuff" />
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.TypeDefs" />
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/RKdev.Sdk.Common.dev.AbstractServices.Pub.Types" />
+  <xs:complexType name="GeneralServiceAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/RKdev.Sdk.Common.dev.AbstractServices.Pub.Types" base="q1:ServiceAnswerOfGeneralErrorCode4hYT7zxC">
+        <xs:sequence>
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Debug.Pub" minOccurs="0" name="DebugInfo" nillable="true" type="q2:DebugInfoCollection" />
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.Stuff" minOccurs="0" name="ErrorDescriptionArguments" nillable="true" type="q3:NamedParameters" />
+          <xs:element minOccurs="0" name="ErrorDescriptionTemplate" nillable="true" type="xs:string" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.TypeDefs" minOccurs="0" name="SubErrorCode" type="q4:SubErrorCode" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GeneralServiceAnswer" nillable="true" type="tns:GeneralServiceAnswer" />
+  <xs:simpleType name="GeneralErrorCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ok" />
+      <xs:enumeration value="AccessDenied" />
+      <xs:enumeration value="ContractViolation" />
+      <xs:enumeration value="InternalError" />
+      <xs:enumeration value="NotFound" />
+      <xs:enumeration value="NotAvailable" />
+      <xs:enumeration value="ValidationError" />
+      <xs:enumeration value="AlreadyExists" />
+      <xs:enumeration value="SessionExpired" />
+      <xs:enumeration value="AccountIsBanned" />
+      <xs:enumeration value="BusinessLogicError" />
+      <xs:enumeration value="IncorrectKey" />
+      <xs:enumeration value="TechnicalProblems" />
+      <xs:enumeration value="TopapiProtocolError" />
+      <xs:enumeration value="TopapiBusinessError" />
+      <xs:enumeration value="TopapiUnknownError" />
+      <xs:enumeration value="PaymentError" />
+      <xs:enumeration value="LoginFailed" />
+      <xs:enumeration value="EmailConfirmationFailed" />
+      <xs:enumeration value="BatchError" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GeneralErrorCode" nillable="true" type="tns:GeneralErrorCode" />
+</xs:schema>

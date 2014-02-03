@@ -25,7 +25,7 @@ namespace TranslateWebApplication.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void About()
         {
             // Arrange
@@ -49,6 +49,6 @@ namespace TranslateWebApplication.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-        }
+        }*/
     }
 }

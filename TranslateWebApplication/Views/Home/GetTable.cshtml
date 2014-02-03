@@ -1,0 +1,71 @@
+﻿@using TranslateWebApplication.Models
+@model TranslateContext
+
+@{
+    RowItem dummy = null;
+
+    // is user pressed save button, and we need to show page with confirm
+    bool isConfirmPage = Model != null && Model.IsReadOnly;
+    object attrs = isConfirmPage ? (object)new { @checked = "checked" } : new { disabled = "disabled" };
+}
+
+@if (Model == null || Model.Count == 0)
+{
+    Html.DisplayText("There is no data for selected language");
+}
+else
+{
+    string actionName = isConfirmPage ? "Save" : "Confirm";
+    <div id="translateform">
+        @using (Html.BeginForm(actionName, "Home", FormMethod.Post))
+        {
+            int i = 0;
+            <table class="grid">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => dummy.IsChanged)</th>
+                    <th>@Html.DisplayNameFor(model => dummy.Id)</th>
+                    <th>@Html.DisplayNameFor(model => dummy.TemplateText)</th>
+                    <th>@Html.DisplayNameFor(model => dummy.Translate)</th>
+                    <th>@Html.DisplayNameFor(model => dummy.NewTranslate)</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.CheckBox("data[" + i + "].IsChanged", item.IsChanged, attrs)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                            @Html.Hidden("data[" + i + "].Id", item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TemplateText)
+                            @Html.Hidden("data[" + i + "].TemplateLang", item.TemplateLang)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Translate)
+                            @Html.Hidden("data[" + i + "].Translate", item.Translate)
+                        </td>
+                        <td>
+                            @(isConfirmPage ? Html.DisplayFor(modelItem => item.NewTranslate) : Html.TextBox("data[" + i + "].NewTranslate", item.NewTranslate))
+                            @Html.Hidden("data[" + i + "].NewTranslate", item.NewTranslate)
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            </table>
+            if (isConfirmPage)
+            {
+                <input id="Reset" type="reset" value="Reset" />
+                <input id="Back" type="button" value="Back" onclick="javascript: history.go(-1);" />
+                <input id="Confirm" type="submit" value="Confirm" />
+            }
+            else
+            {
+                <input id="Save" type="submit" value="Save" />
+            }
+        }
+    </div>
+}

@@ -1633,6 +1633,64 @@ table th[class*="col-"] {
   }
 }
 
+table.grid {
+   color:           inherit;
+   background:      inherit;	/* Don't make tables transparent */
+   border-collapse: collapse;
+   border-spacing:  0;
+   empty-cells:     show;
+   margin:          0.5em 2.5em;
+   padding:         0;
+   border:          1px solid #999999;
+}
+
+table.grid caption {
+   text-align:      center;
+   caption-side:    top;
+   margin:          0 2.5em 0.75em;
+   padding:         0;
+   border:          none;
+}
+
+table.grid td,
+table.grid th {
+   text-align:      center;
+   vertical-align:  middle;
+   margin:          0;
+   padding:         0.25em 0.5em;
+   border:          1px solid #999999;
+}
+
+table.grid th,
+table.grid td.highlight,
+table.grid th.highlight {
+   font-weight:     bold;
+   color:           inherit;
+   background:      #F0F0F0;
+}
+
+table.grid td.lighter,
+table.grid th.lighter {
+   color:           inherit;
+   background:      #F8F8F8;
+}
+
+table.grid td.left,
+table.grid th.left {
+   text-align:      left;
+}
+
+table.grid td.center,
+table.grid th.center {
+   text-align:      center;
+}
+
+table.grid td.right,
+table.grid th.right {
+   text-align:      right;
+}
+
+
 fieldset {
   padding: 0;
   margin: 0;

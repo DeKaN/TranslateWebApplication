@@ -175,7 +175,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ServerData.cs" />
     <Compile Include="Models\TranslateContext.cs" />
-    <Compile Include="Models\TableHeader.cs" />
+    <Compile Include="Models\TableWithHeader.cs" />
     <Compile Include="Models\ViewTableData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\GoblinServiceReference\Reference.cs">

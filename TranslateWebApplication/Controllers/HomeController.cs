@@ -64,24 +64,16 @@
             return result;
         }
 
-
-        public ActionResult Index()
+        public ActionResult Index(string language)
         {
             var servers = from ServerElement server in Config.Servers
                           select new ServerData { Name = server.Key, Url = server.Url };
             var langs = from LangElement lang in Config.Languages
-                        select new SelectListItem { Text = lang.Text, Value = lang.Locale };
-
-            return View(new TableHeader { ServersList = servers, LanguageList = langs });
+                        select new SelectListItem { Text = lang.Text, Value = lang.Locale, Selected = language != null && lang.Locale == language };
+            var translateData = language != null ? LoadItems(language) : null;
+            return View(new TableWithHeader { ServersList = servers, LanguageList = langs, TableData = translateData});
         }
 
-        [HttpPost]
-        [OutputCache(NoStore = true, Duration = 0, VaryByHeader = "X-Requested-With", Location = System.Web.UI.OutputCacheLocation.Server)]
-        public ActionResult GetTable(string lang)
-        {
-            var translateData = LoadItems(lang);
-            return PartialView(translateData);
-        }
 
         [HttpPost]
         [OutputCache(NoStore = true, Duration = 0, VaryByHeader = "X-Requested-With", Location = System.Web.UI.OutputCacheLocation.Server)]
@@ -90,6 +82,7 @@
             var ids = data.Where(item => !string.IsNullOrWhiteSpace(item.NewTranslate)).Select(item => item.Id).ToList();
             string lang = data[0].TemplateLang;
             var translateContext = LoadItems(lang, ids);
+            ModelState.Clear();
             foreach (var rowItem in translateContext)
             {
                 rowItem.IsChanged = true;
@@ -110,7 +103,7 @@
             var package = new KeyedTextPackage { KeyedTexts = keyedTexts };
             var answer = serviceClient.UpdateOrCreateTranslateListByKey(Login, Password, instance, package, lang);
             StringBuilder sb = new StringBuilder("Status: ");
-            sb.Append(answer.ErrorCode).Append("\n");
+            sb.Append(answer.ErrorCode).Append(".\n");
             if (answer.ErrorCode != GeneralErrorCode.Ok)
             {
                 sb.Append(answer.ErrorDescription);

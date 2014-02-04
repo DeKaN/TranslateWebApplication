@@ -58,7 +58,8 @@ else
             </table>
             if (isConfirmPage)
             {
-                <input id="Reset" type="reset" value="Reset" />
+                string path = "/Home/Index/" + Model[0].TemplateLang;
+                <input id="Reset" type="button" value="Reset" onclick="javascript: window.location.href = '@path';" />
                 <input id="Back" type="button" value="Back" onclick="javascript: history.go(-1);" />
                 <input id="Confirm" type="submit" value="Confirm" />
             }

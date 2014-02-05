@@ -13,10 +13,9 @@
 
     public class HomeController : Controller
     {
-        private static readonly TranslaterSection Config =
-        ConfigurationManager.GetSection("translater") as TranslaterSection;
+        private static TranslaterSection Config;
 
-        private readonly GoblinServiceClient serviceClient;
+        private readonly IGoblinService serviceClient;
 
         private const string Login = "test", Password = "test";
 
@@ -31,9 +30,15 @@
         private readonly string instance;
 
         public HomeController()
+            : this(new GoblinServiceClient(), ConfigurationManager.GetSection("translater") as TranslaterSection)
         {
+        }
+
+        public HomeController(IGoblinService goblinService, TranslaterSection configSection)
+        {
+            Config = configSection;
             instance = ConfigurationManager.AppSettings["instance"];
-            serviceClient = new GoblinServiceClient();
+            serviceClient = goblinService;
         }
 
         private TranslateContext LoadItems(string lang, List<string> ids = null)
@@ -71,7 +76,7 @@
             var langs = from LangElement lang in Config.Languages
                         select new SelectListItem { Text = lang.Text, Value = lang.Locale, Selected = language != null && lang.Locale == language };
             var translateData = language != null ? LoadItems(language) : null;
-            return View(new TableWithHeader { ServersList = servers, LanguageList = langs, TableData = translateData});
+            return View(new TableWithHeader { ServersList = servers, LanguageList = langs, TableData = translateData });
         }
 
 
@@ -97,7 +102,8 @@
         {
             string lang = data[0].TemplateLang;
             string contextValue = GetImportFile().Element("Context").Attribute("Value").Value;
-            var keyedTexts = (from item in data where item.IsChanged
+            var keyedTexts = (from item in data
+                              where item.IsChanged
                               let key = new ContextKey { Context = contextValue, Ids = new List<string> { item.Id } }
                               select new KeyedText { Key = key, Text = item.NewTranslate }).ToList();
             var package = new KeyedTextPackage { KeyedTexts = keyedTexts };

@@ -1,5 +1,6 @@
 ﻿namespace TranslateWebApplication.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -21,7 +22,15 @@
         {
             get
             {
-                return this.Single(item => item.Id == id);
+                try
+                {
+                    return this.Single(item => item.Id == id);
+                }
+                catch (Exception)
+                {
+                    // TODO: log this
+                    return null;
+                }
             }
         }
     }

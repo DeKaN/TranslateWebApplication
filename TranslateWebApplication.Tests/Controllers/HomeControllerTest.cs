@@ -75,18 +75,18 @@ namespace TranslateWebApplication.Tests.Controllers
         {
             const string Lang = "en-us";
             const int TranslatesCount = 4;
-            
+
             serviceMock.Setup(m => m.SearchTranslate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TranslateSearchParameters>()))
                 .Returns((string l, string p, string i, TranslateSearchParameters t) => new TranslatedItemListAnswer
-                                                                                        {
-                                                                                            ErrorCode = GeneralErrorCode.Ok,
-                                                                                            Result =
-                                                                                                new DataListOfTranslatedItemwFXowe_P_S
-                                                                                                {
-                                                                                                    Content = this.GenerateItems(t, TranslatesCount)
-                                                                                                }
-                                                                                        });
-
+                {
+                    ErrorCode = GeneralErrorCode.Ok,
+                    Result =
+                        new DataListOfTranslatedItemwFXowe_P_S
+                        {
+                            Content = this.GenerateItems(t, TranslatesCount)
+                        }
+                });
+            
             ViewResult result = controller.Index(Lang) as ViewResult;
 
             TestInit(result);
@@ -113,6 +113,74 @@ namespace TranslateWebApplication.Tests.Controllers
                 });
             }
             return items;
+        }
+
+        [TestMethod]
+        public void Confirm()
+        {
+            const int ChangedCount = 2;
+            List<RowItem> items = new List<RowItem>();
+            items.Add(new RowItem
+            {
+                Id = "AccountIsBanned",
+                Translate = "Translate",
+                NewTranslate = "New translate",
+                TemplateLang = "en-us",
+            });
+            items.Add(new RowItem
+            {
+                Id = "AccountWithId",
+                Translate = "Translate",
+                NewTranslate = "New translate",
+                TemplateLang = "en-us",
+            });
+            var translateContext = new TranslateContext(items) { Value = "context:value" };
+
+            serviceMock.Setup(m => m.SearchTranslate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TranslateSearchParameters>()))
+                .Returns((string l, string p, string i, TranslateSearchParameters t) => new TranslatedItemListAnswer
+                {
+                    ErrorCode = GeneralErrorCode.Ok,
+                    Result =
+                        new DataListOfTranslatedItemwFXowe_P_S
+                        {
+                            Content = this.GenerateItems(t, ChangedCount)
+                        }
+                });
+
+            ViewResult result = controller.Confirm(translateContext) as ViewResult;
+
+            Assert.IsNotNull(result);
+            var model = (TranslateContext)result.Model;
+            Assert.IsNotNull(model);
+            Assert.AreEqual(model.IsReadOnly, true);
+            Assert.AreEqual(model.Count(), ChangedCount);
+        }
+
+        [TestMethod]
+        public void Save()
+        {
+            const int Added = 1, Edited = 0;
+            string message = string.Format("Status: {0}.\nAdded: {1}. Edited: {2}.", GeneralErrorCode.Ok, Added, Edited);
+            var translateContext = new TranslateContext(new List<RowItem> { new RowItem() });
+
+            serviceMock.Setup(m => m.UpdateOrCreateTranslateListByKey(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<KeyedTextPackage>(), It.IsAny<string>()))
+                .Returns(new ChangeSourceInfoAnswer { ErrorCode = GeneralErrorCode.Ok, Result = new ChangeSourceInfo { AddedCount = Added, EditedCount = Edited } });
+
+            ViewResult result = controller.Save(translateContext) as ViewResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.ViewBag.Message, message);
+        }
+
+        [TestMethod]
+        public void SaveNothing()
+        {
+            const string Message = "Nothing changed";
+
+            ViewResult result = controller.Save(new TranslateContext()) as ViewResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.ViewBag.Message, Message);
         }
 
         /*[TestMethod]

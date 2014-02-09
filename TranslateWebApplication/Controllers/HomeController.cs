@@ -84,6 +84,11 @@
         [OutputCache(NoStore = true, Duration = 0, VaryByHeader = "X-Requested-With", Location = System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Confirm(TranslateContext data)
         {
+            if (data.Count == 0)
+            {
+                ViewBag.Message = "Nothing changed";
+                return View();
+            }
             var ids = data.Where(item => !string.IsNullOrWhiteSpace(item.NewTranslate)).Select(item => item.Id).ToList();
             string lang = data[0].TemplateLang;
             var translateContext = LoadItems(lang, ids);
@@ -100,30 +105,38 @@
         [HttpPost]
         public ActionResult Save(TranslateContext data)
         {
-            string lang = data[0].TemplateLang;
-            string contextValue = GetImportFile().Element("Context").Attribute("Value").Value;
-            var keyedTexts = (from item in data
-                              where item.IsChanged
-                              let key = new ContextKey { Context = contextValue, Ids = new List<string> { item.Id } }
-                              select new KeyedText { Key = key, Text = item.NewTranslate }).ToList();
-            var package = new KeyedTextPackage { KeyedTexts = keyedTexts };
-            var answer = serviceClient.UpdateOrCreateTranslateListByKey(Login, Password, instance, package, lang);
-            StringBuilder sb = new StringBuilder("Status: ");
-            sb.Append(answer.ErrorCode).Append(".\n");
-            if (answer.ErrorCode != GeneralErrorCode.Ok)
+            if (data.Count == 0)
             {
-                sb.Append(answer.ErrorDescription);
+                ViewBag.Message = "Nothing changed";
             }
             else
             {
-                var result = answer.Result;
-                sb.Append("Added: ")
-                    .Append(result.AddedCount)
-                    .Append(". Edited: ")
-                    .Append(result.EditedCount)
-                    .Append(".");
+
+                string lang = data[0].TemplateLang;
+                string contextValue = GetImportFile().Element("Context").Attribute("Value").Value;
+                var keyedTexts = (from item in data
+                                  where item.IsChanged
+                                  let key = new ContextKey { Context = contextValue, Ids = new List<string> { item.Id } }
+                                  select new KeyedText { Key = key, Text = item.NewTranslate }).ToList();
+                var package = new KeyedTextPackage { KeyedTexts = keyedTexts };
+                var answer = serviceClient.UpdateOrCreateTranslateListByKey(Login, Password, instance, package, lang);
+                StringBuilder sb = new StringBuilder("Status: ");
+                sb.Append(answer.ErrorCode).Append(".\n");
+                if (answer.ErrorCode != GeneralErrorCode.Ok)
+                {
+                    sb.Append(answer.ErrorDescription);
+                }
+                else
+                {
+                    var result = answer.Result;
+                    sb.Append("Added: ")
+                        .Append(result.AddedCount)
+                        .Append(". Edited: ")
+                        .Append(result.EditedCount)
+                        .Append(".");
+                }
+                ViewBag.Message = sb.ToString();
             }
-            ViewBag.Message = sb.ToString();
             return View();
         }
     }

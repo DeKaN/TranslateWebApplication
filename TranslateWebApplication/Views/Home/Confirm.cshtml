@@ -5,4 +5,12 @@
 }
 
 <div align="center"><b>Список изменений:</b></div>
-@Html.Partial("GetTable", Model)
+@if (Model == null)
+{
+    <div align="center">@ViewBag.Message</div>
+}
+else
+{
+    @Html.Partial("GetTable", Model)
+}
+

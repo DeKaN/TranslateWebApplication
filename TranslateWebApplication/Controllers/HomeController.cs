@@ -11,9 +11,11 @@
     using TranslateWebApplication.GoblinServiceReference;
     using TranslateWebApplication.Models;
 
+    using Configuration = TranslateWebApplication.Configuration;
+
     public class HomeController : Controller
     {
-        private static TranslaterSection Config;
+        private static IConfiguration configuration;
 
         private readonly IGoblinService serviceClient;
 
@@ -27,17 +29,14 @@
             return this.importFile ?? (this.importFile = XElement.Load(this.Server.MapPath("~/import.xml")));
         }
 
-        private readonly string instance;
-
         public HomeController()
-            : this(new GoblinServiceClient(), ConfigurationManager.GetSection("translater") as TranslaterSection)
+            : this(new GoblinServiceClient(), new Configuration())
         {
         }
 
-        public HomeController(IGoblinService goblinService, TranslaterSection configSection)
+        public HomeController(IGoblinService goblinService, IConfiguration config)
         {
-            Config = configSection;
-            instance = ConfigurationManager.AppSettings["instance"];
+            configuration = config;
             serviceClient = goblinService;
         }
 
@@ -54,7 +53,7 @@
             ids = items.Select(item => item.Id).ToList();
             ContextKey key = new ContextKey { Context = contextValue, Ids = ids };
             var searchParams = new TranslateSearchParameters { Context = key, Language = lang };
-            var answer = serviceClient.SearchTranslate(Login, Password, instance, searchParams);
+            var answer = serviceClient.SearchTranslate(Login, Password, configuration.GetInstance(), searchParams);
             if (answer.ErrorCode != GeneralErrorCode.Ok)
                 throw new Exception(answer.ErrorDescription);
             var result = new TranslateContext(items) { Value = contextValue };
@@ -71,12 +70,15 @@
 
         public ActionResult Index(string language)
         {
-            var servers = from ServerElement server in Config.Servers
-                          select new ServerData { Name = server.Key, Url = server.Url };
-            var langs = from LangElement lang in Config.Languages
-                        select new SelectListItem { Text = lang.Text, Value = lang.Locale, Selected = language != null && lang.Locale == language };
-            var translateData = language != null ? LoadItems(language) : null;
-            return View(new TableWithHeader { ServersList = servers, LanguageList = langs, TableData = translateData });
+            TranslateContext translateData = null;
+            var langs = configuration.GetLanguagesList();
+            if (language != null)
+            {
+                var lang = langs.Single(item => item.Value == language);
+                if (lang != null) lang.Selected = true;
+                translateData = LoadItems(language);
+            }
+            return View(new TableWithHeader { ServersList = configuration.GetServersList(), LanguageList = langs, TableData = translateData });
         }
 
 
@@ -119,7 +121,7 @@
                                   let key = new ContextKey { Context = contextValue, Ids = new List<string> { item.Id } }
                                   select new KeyedText { Key = key, Text = item.NewTranslate }).ToList();
                 var package = new KeyedTextPackage { KeyedTexts = keyedTexts };
-                var answer = serviceClient.UpdateOrCreateTranslateListByKey(Login, Password, instance, package, lang);
+                var answer = serviceClient.UpdateOrCreateTranslateListByKey(Login, Password, configuration.GetInstance(), package, lang);
                 StringBuilder sb = new StringBuilder("Status: ");
                 sb.Append(answer.ErrorCode).Append(".\n");
                 if (answer.ErrorCode != GeneralErrorCode.Ok)

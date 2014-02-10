@@ -133,7 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\Configuration.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IConfiguration.cs" />
     <Compile Include="App_Start\ServerElementCollection.cs" />
     <Compile Include="App_Start\ServerElement.cs" />
     <Compile Include="App_Start\LangElement.cs" />

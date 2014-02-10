@@ -34,12 +34,8 @@ namespace TranslateWebApplication.Tests.Controllers
         public void Init()
         {
             serviceMock = new Mock<IGoblinService>();
-            var fileInfo = new FileInfo(Configpath);
-            string dirPath = fileInfo.DirectoryName;
-            string configFullPath = fileInfo.FullName;
-            var configFileMap = new ExeConfigurationFileMap { ExeConfigFilename = configFullPath };
-            configuration = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
-            controller = new HomeController(serviceMock.Object, configuration.GetSection("translater") as TranslaterSection);
+            string dirPath = new FileInfo(Configpath).DirectoryName;
+            controller = new HomeController(serviceMock.Object, new TestConfiguration());
             var serverMock = new Mock<HttpServerUtilityBase>();
             serverMock.Setup(m => m.MapPath("~/import.xml")).Returns(Path.Combine(dirPath, "import.xml"));
             var httpContext = new Mock<HttpContextBase>();

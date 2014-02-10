@@ -5,7 +5,7 @@
 
     public class TableWithHeader
     {
-        public IEnumerable<ServerData> ServersList { get; set; }
+        public IEnumerable<SelectListItem> ServersList { get; set; }
         public IEnumerable<SelectListItem> LanguageList { get; set; }
 
         public TranslateContext TableData { get; set; }

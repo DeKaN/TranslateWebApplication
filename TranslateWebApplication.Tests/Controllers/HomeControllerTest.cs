@@ -1,30 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TranslateWebApplication;
-using TranslateWebApplication.Controllers;
-
-namespace TranslateWebApplication.Tests.Controllers
+﻿namespace TranslateWebApplication.Tests.Controllers
 {
-    using System.Configuration;
-    using System.IO;
-    using System.Web;
-    using System.Web.Routing;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Moq;
 
+    using TranslateWebApplication.Controllers;
     using TranslateWebApplication.GoblinServiceReference;
     using TranslateWebApplication.Models;
+
+    using TestConfiguration = TranslateWebApplication.Tests.TestConfiguration;
 
     [TestClass]
     public class HomeControllerTest
     {
-        private const string Configpath = "../../Web.config";
-
-        private Configuration configuration;
+        private IConfiguration configuration;
 
         private Mock<IGoblinService> serviceMock;
 
@@ -34,13 +27,8 @@ namespace TranslateWebApplication.Tests.Controllers
         public void Init()
         {
             serviceMock = new Mock<IGoblinService>();
-            string dirPath = new FileInfo(Configpath).DirectoryName;
-            controller = new HomeController(serviceMock.Object, new TestConfiguration());
-            var serverMock = new Mock<HttpServerUtilityBase>();
-            serverMock.Setup(m => m.MapPath("~/import.xml")).Returns(Path.Combine(dirPath, "import.xml"));
-            var httpContext = new Mock<HttpContextBase>();
-            httpContext.Setup(p => p.Server).Returns(serverMock.Object);
-            controller.ControllerContext = new ControllerContext(httpContext.Object, new RouteData(), controller);
+            configuration = new TestConfiguration();
+            controller = new HomeController(serviceMock.Object, configuration);
         }
 
         private void TestInit(ViewResult result)
@@ -70,7 +58,6 @@ namespace TranslateWebApplication.Tests.Controllers
         public void IndexWithLang()
         {
             const string Lang = "en-us";
-            const int TranslatesCount = 4;
 
             serviceMock.Setup(m => m.SearchTranslate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TranslateSearchParameters>()))
                 .Returns((string l, string p, string i, TranslateSearchParameters t) => new TranslatedItemListAnswer
@@ -79,58 +66,38 @@ namespace TranslateWebApplication.Tests.Controllers
                     Result =
                         new DataListOfTranslatedItemwFXowe_P_S
                         {
-                            Content = this.GenerateItems(t, TranslatesCount)
+                            Content = this.GenerateItems(t)
                         }
                 });
-            
+
             ViewResult result = controller.Index(Lang) as ViewResult;
 
             TestInit(result);
             var model = (TableWithHeader)result.Model;
             Assert.IsNotNull(model.TableData);
-            Assert.AreEqual(model.TableData.Count(), TranslatesCount);
         }
 
-        private List<TranslatedItem> GenerateItems(TranslateSearchParameters searchParameters, int count)
+        private List<TranslatedItem> GenerateItems(TranslateSearchParameters searchParameters)
         {
-            var items = new List<TranslatedItem>();
-            string lang = searchParameters.Language;
-            var ids = searchParameters.Context.Ids;
-            if (count < ids.Count)
-                count = ids.Count;
-            for (int i = 0; i < count; i++)
-            {
-                items.Add(new TranslatedItem
-                {
-                    Context = searchParameters.Context.Context,
-                    Language = lang,
-                    Translate = "Translate for " + ids[i],
-                    IdInContext = ids[i]
-                });
-            }
-            return items;
+            return searchParameters.Context.Ids.Select(t => new TranslatedItem
+                                                            {
+                                                                Context = searchParameters.Context.Context,
+                                                                Language = searchParameters.Language,
+                                                                Translate = "Translate for " + t,
+                                                                IdInContext = t
+                                                            }).ToList();
         }
 
         [TestMethod]
         public void Confirm()
         {
             const int ChangedCount = 2;
-            List<RowItem> items = new List<RowItem>();
-            items.Add(new RowItem
-            {
-                Id = "AccountIsBanned",
-                Translate = "Translate",
-                NewTranslate = "New translate",
-                TemplateLang = "en-us",
-            });
-            items.Add(new RowItem
-            {
-                Id = "AccountWithId",
-                Translate = "Translate",
-                NewTranslate = "New translate",
-                TemplateLang = "en-us",
-            });
-            var translateContext = new TranslateContext(items) { Value = "context:value" };
+            const string Lang = "en-us";
+            var context = configuration.GetImportFile(null).Element("Context");
+            var items = (from item in context.Elements("Text")
+                         select new RowItem { Id = item.Attribute("Id").Value, NewTranslate = "New translate", TemplateLang = Lang }).ToList();
+
+            var translateContext = new TranslateContext(items) { Value = context.Attribute("Value").Value };
 
             serviceMock.Setup(m => m.SearchTranslate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TranslateSearchParameters>()))
                 .Returns((string l, string p, string i, TranslateSearchParameters t) => new TranslatedItemListAnswer
@@ -139,7 +106,7 @@ namespace TranslateWebApplication.Tests.Controllers
                     Result =
                         new DataListOfTranslatedItemwFXowe_P_S
                         {
-                            Content = this.GenerateItems(t, ChangedCount)
+                            Content = this.GenerateItems(t)
                         }
                 });
 

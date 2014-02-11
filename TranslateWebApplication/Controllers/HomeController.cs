@@ -2,11 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Linq;
     using System.Text;
     using System.Web.Mvc;
-    using System.Xml.Linq;
 
     using TranslateWebApplication.GoblinServiceReference;
     using TranslateWebApplication.Models;
@@ -21,14 +19,6 @@
 
         private const string Login = "test", Password = "test";
 
-        private XElement importFile;
-
-        private XElement GetImportFile()
-        {
-            // TODO: Fix possible NPE in Server
-            return this.importFile ?? (this.importFile = XElement.Load(this.Server.MapPath("~/import.xml")));
-        }
-
         public HomeController()
             : this(new GoblinServiceClient(), new Configuration())
         {
@@ -42,9 +32,9 @@
 
         private TranslateContext LoadItems(string lang, List<string> ids = null)
         {
-            if (GetImportFile().Element("Lang").Value != lang)
+            if (configuration.GetImportFile(Server).Element("Lang").Value != lang)
                 return null;
-            var context = GetImportFile().Element("Context");
+            var context = configuration.GetImportFile(Server).Element("Context");
             string contextValue = context.Attribute("Value").Value;
             var items = (from item in context.Elements("Text")
                          let id = item.Attribute("Id").Value
@@ -115,7 +105,7 @@
             {
 
                 string lang = data[0].TemplateLang;
-                string contextValue = GetImportFile().Element("Context").Attribute("Value").Value;
+                string contextValue = configuration.GetImportFile(Server).Element("Context").Attribute("Value").Value;
                 var keyedTexts = (from item in data
                                   where item.IsChanged
                                   let key = new ContextKey { Context = contextValue, Ids = new List<string> { item.Id } }

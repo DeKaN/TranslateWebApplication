@@ -3,13 +3,15 @@
     using System.Collections.Generic;
     using System.Configuration;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
-
-    using TranslateWebApplication.Models;
+    using System.Xml.Linq;
 
     public class Configuration : IConfiguration
     {
         readonly TranslaterSection Config = ConfigurationManager.GetSection("translater") as TranslaterSection;
+        private XElement importFile;
+
         public IEnumerable<SelectListItem> GetLanguagesList()
         {
             return from LangElement lang in Config.Languages
@@ -26,6 +28,11 @@
         public string GetInstance()
         {
             return ConfigurationManager.AppSettings["instance"];
+        }
+
+        public XElement GetImportFile(HttpServerUtilityBase mapper)
+        {
+            return this.importFile ?? (this.importFile = XElement.Load(mapper.MapPath("~/import.xml")));
         }
     }
 }

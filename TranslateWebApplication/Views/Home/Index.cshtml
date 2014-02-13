@@ -8,23 +8,30 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
-    <div class="col-md-4">&nbsp;</div>
-    <div class="col-md-4">
-        @Html.DropDownListFor(item => item.ServersList, Model.ServersList))
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">&nbsp;</div>
-    <div class="col-md-4">
-        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
-        {
-            @Html.DropDownList("language", Model.LanguageList, "Select Language", new { onchange = "this.form.submit();" });
-        }
-    </div>
-</div>
-@if (Model.TableData != null)
+@if (Model == null)
 {
-    Html.RenderPartial("GetTable", Model.TableData);
+    <div align="center">@ViewBag.Message</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">&nbsp;</div>
+        <div class="col-md-4">
+            @Html.DropDownListFor(item => item.ServersList, Model.ServersList))
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">&nbsp;</div>
+        <div class="col-md-4">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                @Html.DropDownList("language", Model.LanguageList, "Select Language", new { onchange = "this.form.submit();" })
+            }
+        </div>
+    </div>
+            if (Model.TableData != null)
+            {
+                Html.RenderPartial("GetTable", Model.TableData);
+            }
 }

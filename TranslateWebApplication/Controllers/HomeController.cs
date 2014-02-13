@@ -45,7 +45,7 @@
             var searchParams = new TranslateSearchParameters { Context = key, Language = lang };
             var answer = serviceClient.SearchTranslate(Login, Password, configuration.GetInstance(), searchParams);
             if (answer.ErrorCode != GeneralErrorCode.Ok)
-                throw new Exception(answer.ErrorDescription);
+                throw new ServiceAccessException(answer.ErrorCode, answer.ErrorDescription);
             var result = new TranslateContext(items) { Value = contextValue };
             foreach (var translatedItem in answer.Result.Content)
             {
@@ -66,7 +66,16 @@
             {
                 var lang = langs.Single(item => item.Value == language);
                 if (lang != null) lang.Selected = true;
-                translateData = LoadItems(language);
+                try
+                {
+                    translateData = LoadItems(language);
+                }
+                catch (ServiceAccessException e)
+                {
+                    ViewBag.Message = e.ToString();
+                    return View();
+                }
+
             }
             return View(new TableWithHeader { ServersList = configuration.GetServersList(), LanguageList = langs, TableData = translateData });
         }

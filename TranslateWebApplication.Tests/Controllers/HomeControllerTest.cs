@@ -23,6 +23,11 @@
 
         private HomeController controller;
 
+        const GeneralErrorCode ErrorCode = GeneralErrorCode.AccessDenied;
+        const string ErrorText = "Error description";
+
+        readonly string errorMessage = string.Format("Status: {0}.\n{1}", ErrorCode, ErrorText);
+
         [TestInitialize]
         public void Init()
         {
@@ -149,18 +154,30 @@
         [TestMethod]
         public void SaveError()
         {
-            const GeneralErrorCode ErrorCode = GeneralErrorCode.AccessDenied;
-            const string ErrorText = "Error description";
-            string message = string.Format("Status: {0}.\n{1}", ErrorCode, ErrorText);
+
             var translateContext = new TranslateContext(new List<RowItem> { new RowItem() });
 
             serviceMock.Setup(m => m.UpdateOrCreateTranslateListByKey(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<KeyedTextPackage>(), It.IsAny<string>()))
-                .Returns(new ChangeSourceInfoAnswer { ErrorCode = ErrorCode, ErrorDescription = ErrorText});
+                .Returns(new ChangeSourceInfoAnswer { ErrorCode = ErrorCode, ErrorDescription = ErrorText });
 
             ViewResult result = controller.Save(translateContext) as ViewResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.ViewBag.Message, message);
+            Assert.AreEqual(result.ViewBag.Message, errorMessage);
+        }
+
+        [TestMethod]
+        public void IndexError()
+        {
+            const string Lang = "en-us";
+
+            serviceMock.Setup(m => m.SearchTranslate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TranslateSearchParameters>()))
+                .Returns(new TranslatedItemListAnswer { ErrorCode = ErrorCode, ErrorDescription = ErrorText });
+
+            ViewResult result = controller.Index(Lang) as ViewResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.ViewBag.Message, errorMessage);
         }
 
         /*[TestMethod]

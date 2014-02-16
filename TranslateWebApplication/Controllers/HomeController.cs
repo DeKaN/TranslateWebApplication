@@ -47,12 +47,15 @@
             if (answer.ErrorCode != GeneralErrorCode.Ok)
                 throw new ServiceAccessException(answer.ErrorCode, answer.ErrorDescription);
             var result = new TranslateContext(items) { Value = contextValue };
-            foreach (var translatedItem in answer.Result.Content)
+            if (answer.Result.Content != null)
             {
-                var rowItem = result[translatedItem.IdInContext];
-                if (rowItem != null)
+                foreach (var translatedItem in answer.Result.Content)
                 {
-                    rowItem.Translate = translatedItem.Translate;
+                    var rowItem = result[translatedItem.IdInContext];
+                    if (rowItem != null)
+                    {
+                        rowItem.Translate = translatedItem.Translate;
+                    }
                 }
             }
             return result;

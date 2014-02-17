@@ -65,7 +65,7 @@
         {
             TranslateContext translateData = null;
             var langs = configuration.GetLanguagesList();
-            if (language != null)
+            if (!string.IsNullOrEmpty(language))
             {
                 var lang = langs.Single(item => item.Value == language);
                 if (lang != null) lang.Selected = true;

@@ -98,11 +98,11 @@
         {
             const int ChangedCount = 2;
             const string Lang = "en-us";
-            var context = configuration.GetImportFile(null).Element("Context");
-            var items = (from item in context.Elements("Text")
-                         select new RowItem { Id = item.Attribute("Id").Value, NewTranslate = "New translate", TemplateLang = Lang }).ToList();
+            var context = configuration.GetImportPackage(null).Context;
+            var items = (from item in context.Text
+                         select new RowItem { Id = item.Id, NewTranslate = "New translate", TemplateLang = Lang }).ToList();
 
-            var translateContext = new TranslateContext(items) { Value = context.Attribute("Value").Value };
+            var translateContext = new TranslateContext(items) { Value = context.Value };
 
             serviceMock.Setup(m => m.SearchTranslate(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TranslateSearchParameters>()))
                 .Returns((string l, string p, string i, TranslateSearchParameters t) => new TranslatedItemListAnswer

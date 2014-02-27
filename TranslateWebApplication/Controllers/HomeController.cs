@@ -9,6 +9,8 @@
     using TranslateWebApplication.GoblinServiceReference;
     using TranslateWebApplication.Models;
 
+    using WebGrease;
+
     using Configuration = TranslateWebApplication.Configuration;
 
     public class HomeController : Controller
@@ -32,14 +34,15 @@
 
         private TranslateContext LoadItems(string lang, List<string> ids = null)
         {
-            if (configuration.GetImportFile(Server).Element("Lang").Value != lang)
+            var config = configuration.GetImportPackage(Server);
+            if (config == null || config.Lang != lang)
                 return null;
-            var context = configuration.GetImportFile(Server).Element("Context");
-            string contextValue = context.Attribute("Value").Value;
-            var items = (from item in context.Elements("Text")
-                         let id = item.Attribute("Id").Value
-                         where ids == null || ids.Contains(id)
-                         select new RowItem { Id = id, TemplateText = item.Value, TemplateLang = lang }).ToList();
+
+            var context = config.Context;
+            string contextValue = context.Value;
+            var items = (from text in context.Text
+                         where ids == null || ids.Contains(text.Id)
+                         select new RowItem { Id = text.Id, TemplateText = text.Value, TemplateLang = lang }).ToList();
             ids = items.Select(item => item.Id).ToList();
             ContextKey key = new ContextKey { Context = contextValue, Ids = ids };
             var searchParams = new TranslateSearchParameters { Context = key, Language = lang };
@@ -117,7 +120,7 @@
             {
 
                 string lang = data[0].TemplateLang;
-                string contextValue = configuration.GetImportFile(Server).Element("Context").Attribute("Value").Value;
+                string contextValue = configuration.GetImportPackage(Server).Context.Value;
                 var keyedTexts = (from item in data
                                   where item.IsChanged
                                   let key = new ContextKey { Context = contextValue, Ids = new List<string> { item.Id } }

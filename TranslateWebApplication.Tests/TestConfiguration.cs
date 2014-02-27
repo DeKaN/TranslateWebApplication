@@ -1,9 +1,12 @@
 ﻿namespace TranslateWebApplication.Tests
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Web;
     using System.Web.Mvc;
     using System.Xml.Linq;
+    using System.Xml.Serialization;
 
     class TestConfiguration : IConfiguration
     {
@@ -35,9 +38,25 @@
             return "opentao";
         }
 
-        public XElement GetImportFile(HttpServerUtilityBase mapper)
+        public ImportPackage GetImportPackage(HttpServerUtilityBase mapper)
         {
-            return XElement.Parse(ImportStub);
+            TextReader reader = null;
+            try
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(ImportPackage));
+                reader = new StringReader(ImportStub);
+                ImportPackage result = (ImportPackage)deserializer.Deserialize(reader);
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+            }
         }
     }
 }

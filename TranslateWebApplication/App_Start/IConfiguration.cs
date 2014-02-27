@@ -13,6 +13,6 @@
 
         string GetInstance();
 
-        XElement GetImportFile(HttpServerUtilityBase mapper);
+        ImportPackage GetImportPackage(HttpServerUtilityBase mapper);
     }
 }

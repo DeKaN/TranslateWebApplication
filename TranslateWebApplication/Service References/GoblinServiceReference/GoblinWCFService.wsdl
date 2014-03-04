@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GoblinWCFService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IGoblinService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="BinaryHttpBinding_IGoblinService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -12,59 +20,36 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Answers" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Backbone.Dispatching.ServiceModel.Pub.Types.Answers" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/RKdev.Sdk.Common.dev.AbstractServices.Pub.Types" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Debug.Pub" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.Stuff" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.TypeDefs" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd8" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Answers" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Backbone.Dispatching.ServiceModel.Pub.Types.Answers" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/RKdev.Sdk.Common.dev.AbstractServices.Pub.Types" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Debug" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.Stuff" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.TypeDefs" />
       <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.Pub" />
-      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Entities" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd10" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.ComplexTypes" />
+      <xsd:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Entities" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IGoblinService_TranslateTextPackage_InputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateTextPackage" />
+  <wsdl:message name="IGoblinService_EditDictionaryTranslate_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditDictionaryTranslate" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateTextPackage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateTextPackageResponse" />
+  <wsdl:message name="IGoblinService_EditDictionaryTranslate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditDictionaryTranslateResponse" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateText_InputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateText" />
+  <wsdl:message name="IGoblinService_FindTranslate_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindTranslate" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateText_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateTextResponse" />
+  <wsdl:message name="IGoblinService_FindTranslate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindTranslateResponse" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateHtml_InputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateHtml" />
+  <wsdl:message name="IGoblinService_GetTranslatedListByKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTranslatedListByKey" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateHtml_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateHtmlResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateTextPackageByKeys_InputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateTextPackageByKeys" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateTextPackageByKeys_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateTextPackageByKeysResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateTextByKey_InputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateTextByKey" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_TranslateTextByKey_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TranslateTextByKeyResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_UpdateOrCreateTranslateByKey_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateOrCreateTranslateByKey" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_UpdateOrCreateTranslateByKey_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateOrCreateTranslateByKeyResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_UpdateOrCreateTranslateListByKey_InputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateOrCreateTranslateListByKey" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_UpdateOrCreateTranslateListByKey_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UpdateOrCreateTranslateListByKeyResponse" />
+  <wsdl:message name="IGoblinService_GetTranslatedListByKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTranslatedListByKeyResponse" />
   </wsdl:message>
   <wsdl:message name="IGoblinService_RemoveTranslateByKey_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveTranslateByKey" />
@@ -78,12 +63,6 @@
   <wsdl:message name="IGoblinService_RemoveTranslateLsitByKey_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemoveTranslateLsitByKeyResponse" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_GetTranslatedListByKey_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetTranslatedListByKey" />
-  </wsdl:message>
-  <wsdl:message name="IGoblinService_GetTranslatedListByKey_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetTranslatedListByKeyResponse" />
-  </wsdl:message>
   <wsdl:message name="IGoblinService_SearchTextsByContext_InputMessage">
     <wsdl:part name="parameters" element="tns:SearchTextsByContext" />
   </wsdl:message>
@@ -96,46 +75,60 @@
   <wsdl:message name="IGoblinService_SearchTranslate_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchTranslateResponse" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_FindTranslate_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindTranslate" />
+  <wsdl:message name="IGoblinService_TranslateHtml_InputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateHtml" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_FindTranslate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindTranslateResponse" />
+  <wsdl:message name="IGoblinService_TranslateHtml_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateHtmlResponse" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_EditDictionaryTranslate_InputMessage">
-    <wsdl:part name="parameters" element="tns:EditDictionaryTranslate" />
+  <wsdl:message name="IGoblinService_TranslateText_InputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateText" />
   </wsdl:message>
-  <wsdl:message name="IGoblinService_EditDictionaryTranslate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:EditDictionaryTranslateResponse" />
+  <wsdl:message name="IGoblinService_TranslateText_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_TranslateTextByKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateTextByKey" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_TranslateTextByKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateTextByKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_TranslateTextPackage_InputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateTextPackage" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_TranslateTextPackage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateTextPackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_TranslateTextPackageByKeys_InputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateTextPackageByKeys" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_TranslateTextPackageByKeys_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TranslateTextPackageByKeysResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_UpdateOrCreateTranslateByKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrCreateTranslateByKey" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_UpdateOrCreateTranslateByKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrCreateTranslateByKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_UpdateOrCreateTranslateListByKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrCreateTranslateListByKey" />
+  </wsdl:message>
+  <wsdl:message name="IGoblinService_UpdateOrCreateTranslateListByKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrCreateTranslateListByKeyResponse" />
   </wsdl:message>
   <wsdl:portType name="IGoblinService">
-    <wsdl:operation name="TranslateTextPackage">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextPackage" message="tns:IGoblinService_TranslateTextPackage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextPackageResponse" message="tns:IGoblinService_TranslateTextPackage_OutputMessage" />
+    <wsdl:operation name="EditDictionaryTranslate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/EditDictionaryTranslate" message="tns:IGoblinService_EditDictionaryTranslate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/EditDictionaryTranslateResponse" message="tns:IGoblinService_EditDictionaryTranslate_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="TranslateText">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateText" message="tns:IGoblinService_TranslateText_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextResponse" message="tns:IGoblinService_TranslateText_OutputMessage" />
+    <wsdl:operation name="FindTranslate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/FindTranslate" message="tns:IGoblinService_FindTranslate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/FindTranslateResponse" message="tns:IGoblinService_FindTranslate_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="TranslateHtml">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateHtml" message="tns:IGoblinService_TranslateHtml_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateHtmlResponse" message="tns:IGoblinService_TranslateHtml_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="TranslateTextPackageByKeys">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" message="tns:IGoblinService_TranslateTextPackageByKeys_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextPackageByKeysResponse" message="tns:IGoblinService_TranslateTextPackageByKeys_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="TranslateTextByKey">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextByKey" message="tns:IGoblinService_TranslateTextByKey_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextByKeyResponse" message="tns:IGoblinService_TranslateTextByKey_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UpdateOrCreateTranslateByKey">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" message="tns:IGoblinService_UpdateOrCreateTranslateByKey_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKeyResponse" message="tns:IGoblinService_UpdateOrCreateTranslateByKey_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" message="tns:IGoblinService_UpdateOrCreateTranslateListByKey_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKeyResponse" message="tns:IGoblinService_UpdateOrCreateTranslateListByKey_OutputMessage" />
+    <wsdl:operation name="GetTranslatedListByKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/GetTranslatedListByKey" message="tns:IGoblinService_GetTranslatedListByKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/GetTranslatedListByKeyResponse" message="tns:IGoblinService_GetTranslatedListByKey_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RemoveTranslateByKey">
       <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/RemoveTranslateByKey" message="tns:IGoblinService_RemoveTranslateByKey_InputMessage" />
@@ -145,10 +138,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/RemoveTranslateLsitByKey" message="tns:IGoblinService_RemoveTranslateLsitByKey_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/RemoveTranslateLsitByKeyResponse" message="tns:IGoblinService_RemoveTranslateLsitByKey_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetTranslatedListByKey">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/GetTranslatedListByKey" message="tns:IGoblinService_GetTranslatedListByKey_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/GetTranslatedListByKeyResponse" message="tns:IGoblinService_GetTranslatedListByKey_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="SearchTextsByContext">
       <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/SearchTextsByContext" message="tns:IGoblinService_SearchTextsByContext_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/SearchTextsByContextResponse" message="tns:IGoblinService_SearchTextsByContext_OutputMessage" />
@@ -157,19 +146,39 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/SearchTranslate" message="tns:IGoblinService_SearchTranslate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/SearchTranslateResponse" message="tns:IGoblinService_SearchTranslate_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FindTranslate">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/FindTranslate" message="tns:IGoblinService_FindTranslate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/FindTranslateResponse" message="tns:IGoblinService_FindTranslate_OutputMessage" />
+    <wsdl:operation name="TranslateHtml">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateHtml" message="tns:IGoblinService_TranslateHtml_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateHtmlResponse" message="tns:IGoblinService_TranslateHtml_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="EditDictionaryTranslate">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/EditDictionaryTranslate" message="tns:IGoblinService_EditDictionaryTranslate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/EditDictionaryTranslateResponse" message="tns:IGoblinService_EditDictionaryTranslate_OutputMessage" />
+    <wsdl:operation name="TranslateText">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateText" message="tns:IGoblinService_TranslateText_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextResponse" message="tns:IGoblinService_TranslateText_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextByKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextByKey" message="tns:IGoblinService_TranslateTextByKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextByKeyResponse" message="tns:IGoblinService_TranslateTextByKey_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextPackage" message="tns:IGoblinService_TranslateTextPackage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextPackageResponse" message="tns:IGoblinService_TranslateTextPackage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackageByKeys">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" message="tns:IGoblinService_TranslateTextPackageByKeys_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/TranslateTextPackageByKeysResponse" message="tns:IGoblinService_TranslateTextPackageByKeys_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateByKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" message="tns:IGoblinService_UpdateOrCreateTranslateByKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKeyResponse" message="tns:IGoblinService_UpdateOrCreateTranslateByKey_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" message="tns:IGoblinService_UpdateOrCreateTranslateListByKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKeyResponse" message="tns:IGoblinService_UpdateOrCreateTranslateListByKey_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGoblinService" type="tns:IGoblinService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="TranslateTextPackage">
-      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackage" style="document" />
+    <wsdl:operation name="EditDictionaryTranslate">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/EditDictionaryTranslate" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -177,8 +186,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TranslateText">
-      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateText" style="document" />
+    <wsdl:operation name="FindTranslate">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/FindTranslate" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -186,44 +195,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TranslateHtml">
-      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateHtml" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="TranslateTextPackageByKeys">
-      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="TranslateTextByKey">
-      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextByKey" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UpdateOrCreateTranslateByKey">
-      <soap:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
-      <soap:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" style="document" />
+    <wsdl:operation name="GetTranslatedListByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/GetTranslatedListByKey" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -249,8 +222,128 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SearchTextsByContext">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/SearchTextsByContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchTranslate">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/SearchTranslate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateHtml">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateText">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackage">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackageByKeys">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IGoblinService1" type="tns:IGoblinService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EditDictionaryTranslate">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/EditDictionaryTranslate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindTranslate">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/FindTranslate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetTranslatedListByKey">
       <soap:operation soapAction="http://tempuri.org/IGoblinService/GetTranslatedListByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslateByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/RemoveTranslateByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslateLsitByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/RemoveTranslateLsitByKey" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -276,8 +369,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FindTranslate">
-      <soap:operation soapAction="http://tempuri.org/IGoblinService/FindTranslate" style="document" />
+    <wsdl:operation name="TranslateHtml">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateHtml" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -285,6 +378,63 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="TranslateText">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackage">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackageByKeys">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IGoblinService2" type="tns:IGoblinService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="EditDictionaryTranslate">
       <soap:operation soapAction="http://tempuri.org/IGoblinService/EditDictionaryTranslate" style="document" />
       <wsdl:input>
@@ -294,57 +444,129 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="BinaryHttpBinding_IGoblinService" type="tns:IGoblinService">
-    <wsp:PolicyReference URI="#BinaryHttpBinding_IGoblinService_policy" />
-    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="TranslateTextPackage">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackage" style="document" />
+    <wsdl:operation name="FindTranslate">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/FindTranslate" style="document" />
       <wsdl:input>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TranslateText">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateText" style="document" />
+    <wsdl:operation name="GetTranslatedListByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/GetTranslatedListByKey" style="document" />
       <wsdl:input>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslateByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/RemoveTranslateByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslateLsitByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/RemoveTranslateLsitByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchTextsByContext">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/SearchTextsByContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchTranslate">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/SearchTranslate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="TranslateHtml">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateHtml" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateHtml" style="document" />
       <wsdl:input>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="TranslateTextPackageByKeys">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" style="document" />
+    <wsdl:operation name="TranslateText">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateText" style="document" />
       <wsdl:input>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="TranslateTextByKey">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextByKey" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextByKey" style="document" />
       <wsdl:input>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <soap12:body use="literal" />
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackage">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackageByKeys">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdateOrCreateTranslateByKey">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
+      <soap:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IGoblinService" type="tns:IGoblinService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGoblinService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="EditDictionaryTranslate">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/EditDictionaryTranslate" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -352,8 +574,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" style="document" />
+    <wsdl:operation name="FindTranslate">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/FindTranslate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTranslatedListByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/GetTranslatedListByKey" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -379,8 +610,129 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SearchTextsByContext">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/SearchTextsByContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchTranslate">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/SearchTranslate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateHtml">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateHtml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateText">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackage">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackageByKeys">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BinaryHttpBinding_IGoblinService" type="tns:IGoblinService">
+    <wsp:PolicyReference URI="#BinaryHttpBinding_IGoblinService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EditDictionaryTranslate">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/EditDictionaryTranslate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindTranslate">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/FindTranslate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetTranslatedListByKey">
       <soap12:operation soapAction="http://tempuri.org/IGoblinService/GetTranslatedListByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslateByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/RemoveTranslateByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTranslateLsitByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/RemoveTranslateLsitByKey" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -406,8 +758,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FindTranslate">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/FindTranslate" style="document" />
+    <wsdl:operation name="TranslateHtml">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateHtml" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -415,8 +767,53 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="EditDictionaryTranslate">
-      <soap12:operation soapAction="http://tempuri.org/IGoblinService/EditDictionaryTranslate" style="document" />
+    <wsdl:operation name="TranslateText">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackage">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TranslateTextPackageByKeys">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/TranslateTextPackageByKeys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrCreateTranslateListByKey">
+      <soap12:operation soapAction="http://tempuri.org/IGoblinService/UpdateOrCreateTranslateListByKey" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -429,17 +826,23 @@
     <wsdl:port name="BasicHttpBinding_IGoblinService" binding="tns:BasicHttpBinding_IGoblinService">
       <soap:address location="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc" />
     </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IGoblinService1" binding="tns:BasicHttpBinding_IGoblinService1">
+      <soap:address location="http://goblin.localization.dev.services.opentao.net/GoblinWCF.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IGoblinService2" binding="tns:BasicHttpBinding_IGoblinService2">
+      <soap:address location="http://goblin.localization.services.opentao.net/GoblinWCF.svc" />
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IGoblinService" binding="tns:NetTcpBinding_IGoblinService">
+      <soap12:address location="net.tcp://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
     <wsdl:port name="BinaryHttpBinding_IGoblinService" binding="tns:BinaryHttpBinding_IGoblinService">
       <soap12:address location="http://proto.goblin.localization.dev.joker.opentao.net/GoblinWCF.svc" />
       <wsa10:EndpointReference>
         <wsa10:Address>http://proto.goblin.localization.dev.joker.opentao.net/GoblinWCF.svc</wsa10:Address>
       </wsa10:EndpointReference>
-    </wsdl:port>
-    <wsdl:port name="BasicHttpBinding_IGoblinService1" binding="tns:BasicHttpBinding_IGoblinService">
-      <soap:address location="http://goblin.localization.dev.services.opentao.net/GoblinWCF.svc" />
-    </wsdl:port>
-    <wsdl:port name="BasicHttpBinding_IGoblinService2" binding="tns:BasicHttpBinding_IGoblinService">
-      <soap:address location="http://goblin.localization.services.opentao.net/GoblinWCF.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

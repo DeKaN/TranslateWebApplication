@@ -139,6 +139,9 @@
     <None Include="Service References\GoblinServiceReference\GoblinWCF.disco" />
     <None Include="Service References\GoblinServiceReference\configuration91.svcinfo" />
     <None Include="Service References\GoblinServiceReference\configuration.svcinfo" />
+    <None Include="Service References\GoblinServiceReference\GoblinWCF12.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\GoblinServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

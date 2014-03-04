@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.Stuff" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.Stuff" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="NamedParameters">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Debug" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Debug" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="DebugInfoCollection">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Parameters" nillable="true" type="tns:ArrayOfNamedParameter" />
+      <xs:element minOccurs="0" name="Records" nillable="true" type="tns:ArrayOfDebugInfoRecord" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="NamedParameters" nillable="true" type="tns:NamedParameters" />
-  <xs:complexType name="ArrayOfNamedParameter">
+  <xs:element name="DebugInfoCollection" nillable="true" type="tns:DebugInfoCollection" />
+  <xs:complexType name="ArrayOfDebugInfoRecord">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="NamedParameter" nillable="true" type="tns:NamedParameter" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DebugInfoRecord" nillable="true" type="tns:DebugInfoRecord" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfNamedParameter" nillable="true" type="tns:ArrayOfNamedParameter" />
-  <xs:complexType name="NamedParameter">
+  <xs:element name="ArrayOfDebugInfoRecord" nillable="true" type="tns:ArrayOfDebugInfoRecord" />
+  <xs:complexType name="DebugInfoRecord">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ParameterName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Time" type="xs:double" />
+      <xs:element minOccurs="0" name="Count" type="xs:int" />
+      <xs:element minOccurs="0" name="Parallel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="InnerInfo" nillable="true" type="tns:ArrayOfDebugInfoRecord" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="NamedParameter" nillable="true" type="tns:NamedParameter" />
+  <xs:element name="DebugInfoRecord" nillable="true" type="tns:DebugInfoRecord" />
 </xs:schema>

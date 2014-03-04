@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd8" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:complexType name="KeyedTextPackage">
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd10" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="TranslateFindParameters">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TranslateSearchParameters">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TranslateFindParameters" nillable="true" type="tns:TranslateFindParameters" />
+  <xs:complexType name="TranslateSearchParameters">
     <xs:sequence>
-      <xs:element minOccurs="0" name="KeyedTexts" nillable="true" type="tns:ArrayOfKeyedText" />
+      <xs:element minOccurs="0" name="Context" nillable="true" type="tns:ContextKey" />
+      <xs:element minOccurs="0" name="Language" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="KeyedTextPackage" nillable="true" type="tns:KeyedTextPackage" />
-  <xs:complexType name="ArrayOfKeyedText">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyedText" nillable="true" type="tns:KeyedText" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfKeyedText" nillable="true" type="tns:ArrayOfKeyedText" />
-  <xs:complexType name="KeyedText">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="IsHtml" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Key" nillable="true" type="tns:ContextKey" />
-      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="KeyedText" nillable="true" type="tns:KeyedText" />
+  <xs:element name="TranslateSearchParameters" nillable="true" type="tns:TranslateSearchParameters" />
   <xs:complexType name="ContextKey">
     <xs:sequence>
       <xs:element minOccurs="0" name="Context" nillable="true" type="xs:string" />
@@ -28,6 +23,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ContextKey" nillable="true" type="tns:ContextKey" />
+  <xs:complexType name="TranslatedItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Context" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdInContext" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Language" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Translate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TranslatedItem" nillable="true" type="tns:TranslatedItem" />
   <xs:complexType name="ArrayOfContextKey">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ContextKey" nillable="true" type="tns:ContextKey" />
@@ -47,6 +51,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TextByLang" nillable="true" type="tns:TextByLang" />
+  <xs:complexType name="KeyedText">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsHtml" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Key" nillable="true" type="tns:ContextKey" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="KeyedText" nillable="true" type="tns:KeyedText" />
+  <xs:complexType name="KeyedTextPackage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="KeyedTexts" nillable="true" type="tns:ArrayOfKeyedText" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="KeyedTextPackage" nillable="true" type="tns:KeyedTextPackage" />
+  <xs:complexType name="ArrayOfKeyedText">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyedText" nillable="true" type="tns:KeyedText" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyedText" nillable="true" type="tns:ArrayOfKeyedText" />
   <xs:complexType name="ArrayOfTextById">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="TextById" nillable="true" type="tns:TextById" />
@@ -60,34 +84,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TextById" nillable="true" type="tns:TextById" />
-  <xs:complexType name="TranslateSearchParameters">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Context" nillable="true" type="tns:ContextKey" />
-      <xs:element minOccurs="0" name="Language" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="TranslateSearchParameters" nillable="true" type="tns:TranslateSearchParameters" />
   <xs:complexType name="ArrayOfTranslatedItem">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="TranslatedItem" nillable="true" type="tns:TranslatedItem" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfTranslatedItem" nillable="true" type="tns:ArrayOfTranslatedItem" />
-  <xs:complexType name="TranslatedItem">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Context" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdInContext" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Language" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Translate" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="TranslatedItem" nillable="true" type="tns:TranslatedItem" />
-  <xs:complexType name="TranslateFindParameters">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:TranslateSearchParameters">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="TranslateFindParameters" nillable="true" type="tns:TranslateFindParameters" />
 </xs:schema>

@@ -1,45 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Backbone.Dispatching.ServiceModel.Pub.Types.Answers" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Backbone.Dispatching.ServiceModel.Pub.Types.Answers" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Debug.Pub" />
-  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.Stuff" />
-  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.TypeDefs" />
-  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/RKdev.Sdk.Common.dev.AbstractServices.Pub.Types" />
-  <xs:complexType name="GeneralServiceAnswer">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Answers" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Goblin.Common.Pub.Types.Answers" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types" />
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Backbone.Dispatching.ServiceModel.Pub.Types.Answers" />
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" />
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.ComplexTypes" />
+  <xs:import schemaLocation="http://goblin.localization.dev.joker.opentao.net/GoblinWCF.svc?xsd=xsd10" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ChangeSourceInfoAnswer">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/RKdev.Sdk.Common.dev.AbstractServices.Pub.Types" base="q1:ServiceAnswerOfGeneralErrorCode4hYT7zxC">
+      <xs:extension base="tns:GoblinAnswer">
         <xs:sequence>
-          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Debug.Pub" minOccurs="0" name="DebugInfo" nillable="true" type="q2:DebugInfoCollection" />
-          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.Stuff" minOccurs="0" name="ErrorDescriptionArguments" nillable="true" type="q3:NamedParameters" />
-          <xs:element minOccurs="0" name="ErrorDescriptionTemplate" nillable="true" type="xs:string" />
-          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Exceptions.Pub.TypeDefs" minOccurs="0" name="SubErrorCode" type="q4:SubErrorCode" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types" minOccurs="0" name="Result" nillable="true" type="q1:ChangeSourceInfo" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="GeneralServiceAnswer" nillable="true" type="tns:GeneralServiceAnswer" />
-  <xs:simpleType name="GeneralErrorCode">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Ok" />
-      <xs:enumeration value="AccessDenied" />
-      <xs:enumeration value="ContractViolation" />
-      <xs:enumeration value="InternalError" />
-      <xs:enumeration value="NotFound" />
-      <xs:enumeration value="NotAvailable" />
-      <xs:enumeration value="ValidationError" />
-      <xs:enumeration value="AlreadyExists" />
-      <xs:enumeration value="SessionExpired" />
-      <xs:enumeration value="AccountIsBanned" />
-      <xs:enumeration value="BusinessLogicError" />
-      <xs:enumeration value="IncorrectKey" />
-      <xs:enumeration value="TechnicalProblems" />
-      <xs:enumeration value="TopapiProtocolError" />
-      <xs:enumeration value="TopapiBusinessError" />
-      <xs:enumeration value="TopapiUnknownError" />
-      <xs:enumeration value="PaymentError" />
-      <xs:enumeration value="LoginFailed" />
-      <xs:enumeration value="EmailConfirmationFailed" />
-      <xs:enumeration value="BatchError" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="GeneralErrorCode" nillable="true" type="tns:GeneralErrorCode" />
+  <xs:element name="ChangeSourceInfoAnswer" nillable="true" type="tns:ChangeSourceInfoAnswer" />
+  <xs:complexType name="GoblinAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Backbone.Dispatching.ServiceModel.Pub.Types.Answers" base="q2:GeneralServiceAnswer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RequestTimeStatistic" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GoblinAnswer" nillable="true" type="tns:GoblinAnswer" />
+  <xs:complexType name="TranslatedItemAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Localization.Common.Pub.Types" minOccurs="0" name="Result" nillable="true" type="q3:TranslatedItem" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TranslatedItemAnswer" nillable="true" type="tns:TranslatedItemAnswer" />
+  <xs:complexType name="TextByLangListAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.ComplexTypes" minOccurs="0" name="Result" nillable="true" type="q4:DataListOfTextByLangwFXowe_P_S" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TextByLangListAnswer" nillable="true" type="tns:TextByLangListAnswer" />
+  <xs:complexType name="TextByIdListAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.ComplexTypes" minOccurs="0" name="Result" nillable="true" type="q5:DataListOfTextByIdwFXowe_P_S" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TextByIdListAnswer" nillable="true" type="tns:TextByIdListAnswer" />
+  <xs:complexType name="TranslatedItemListAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.ComplexTypes" minOccurs="0" name="Result" nillable="true" type="q6:DataListOfTranslatedItemwFXowe_P_S" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TranslatedItemListAnswer" nillable="true" type="tns:TranslatedItemListAnswer" />
+  <xs:complexType name="TranslateHtmlAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TranslateHtmlAnswer" nillable="true" type="tns:TranslateHtmlAnswer" />
+  <xs:complexType name="TranslateTextAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TranslateTextAnswer" nillable="true" type="tns:TranslateTextAnswer" />
+  <xs:complexType name="TranslateTextByKeyAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TranslateTextByKeyAnswer" nillable="true" type="tns:TranslateTextByKeyAnswer" />
+  <xs:complexType name="TranslateTextPackageAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Result" nillable="true" type="q7:ArrayOfstring" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TranslateTextPackageAnswer" nillable="true" type="tns:TranslateTextPackageAnswer" />
+  <xs:complexType name="TranslatedTextListAnswer">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GoblinAnswer">
+        <xs:sequence>
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RKdev.EWay.Opentao.dev.Common.Types.ComplexTypes" minOccurs="0" name="Result" nillable="true" type="q8:DataListOfTranslatedTextxBHmhEPe" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TranslatedTextListAnswer" nillable="true" type="tns:TranslatedTextListAnswer" />
 </xs:schema>

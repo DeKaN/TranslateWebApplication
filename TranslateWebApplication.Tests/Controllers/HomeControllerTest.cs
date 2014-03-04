@@ -48,18 +48,6 @@
         }
 
         [TestMethod]
-        public void Index()
-        {
-            string lang = null;
-
-            ViewResult result = controller.Index(lang) as ViewResult;
-
-            TestInit(result);
-            var model = (TableWithHeader)result.Model;
-            Assert.IsNull(model.TableData);
-        }
-
-        [TestMethod]
         public void IndexWithLang()
         {
             const string Lang = "en-us";

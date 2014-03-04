@@ -35,7 +35,7 @@
         private TranslateContext LoadItems(string lang, List<string> ids = null)
         {
             var config = configuration.GetImportPackage(Server);
-            if (config == null || config.Lang != lang)
+            if (config == null)
                 return null;
 
             var context = config.Context;
@@ -68,21 +68,18 @@
         {
             TranslateContext translateData = null;
             var langs = configuration.GetLanguagesList();
-            if (!string.IsNullOrEmpty(language))
+            try
             {
-                var lang = langs.Single(item => item.Value == language);
+                var lang = string.IsNullOrEmpty(language) ? langs.First() : langs.Single(item => item.Value == language);
                 if (lang != null) lang.Selected = true;
-                try
-                {
-                    translateData = LoadItems(language);
-                }
-                catch (ServiceAccessException e)
-                {
-                    ViewBag.Message = e.ToString();
-                    return View();
-                }
-
+                translateData = LoadItems(language);
             }
+            catch (Exception e)
+            {
+                ViewBag.Message = e.ToString();
+                return View();
+            }
+
             return View(new TableWithHeader { ServersList = configuration.GetServersList(), LanguageList = langs, TableData = translateData });
         }
 

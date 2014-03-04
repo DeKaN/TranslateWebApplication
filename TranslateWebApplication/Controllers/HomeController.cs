@@ -70,7 +70,17 @@
             var langs = configuration.GetLanguagesList();
             try
             {
-                var lang = string.IsNullOrEmpty(language) ? langs.First() : langs.Single(item => item.Value == language);
+                SelectListItem lang;
+                if (string.IsNullOrEmpty(language))
+                {
+                    lang = langs.First();
+                    language = lang.Value;
+                }
+                else
+                {
+                    lang = langs.Single(item => item.Value == language);
+                }
+                
                 if (lang != null) lang.Selected = true;
                 translateData = LoadItems(language);
             }

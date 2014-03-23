@@ -35,21 +35,10 @@
 
         public ImportPackage GetImportPackage(HttpServerUtilityBase mapper)
         {
-            TextReader reader = null;
-            try
+            using (var reader = new StreamReader(mapper.MapPath("~/import.xml")))
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(ImportPackage));
-                reader = new StreamReader(mapper.MapPath("~/import.xml"));
                 importPackage = (ImportPackage)deserializer.Deserialize(reader);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-            finally
-            {
-                if (reader != null)
-                    reader.Close();
             }
             return importPackage;
         }

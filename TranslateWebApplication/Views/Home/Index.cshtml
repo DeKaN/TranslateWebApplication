@@ -17,7 +17,7 @@ else
     <div class="row">
         <div class="col-md-4">&nbsp;</div>
         <div class="col-md-4">
-            @Html.DropDownListFor(item => item.ServersList, Model.ServersList)
+            <text>Контур: </text>@Html.DropDownListFor(item => item.ServersList, Model.ServersList)
         </div>
     </div>
 
@@ -26,7 +26,7 @@ else
         <div class="col-md-4">
             @using (Html.BeginForm("Index", "Home", FormMethod.Get))
             {
-                @Html.DropDownList("language", Model.LanguageList, new { onchange = "this.form.submit();" })
+                <text>Язык:</text>@Html.DropDownList("language", Model.LanguageList, new { onchange = "this.form.submit();" })
             }
         </div>
     </div>

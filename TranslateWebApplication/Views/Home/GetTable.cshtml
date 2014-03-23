@@ -6,12 +6,13 @@
 
     // is user pressed save button, and we need to show page with confirm
     bool isConfirmPage = Model != null && Model.IsReadOnly;
+    object readOnlyAttrs = new { @readonly = "readonly" };
     object attrs = isConfirmPage ? (object)new { @checked = "checked" } : new { disabled = "disabled" };
 }
 
 @if (Model == null || Model.Count == 0)
 {
-    Html.DisplayText("There is no data for selected language");
+    <text>Не найдено данных для выбранного языка.</text>
 }
 else
 {
@@ -44,8 +45,7 @@ else
                             @Html.Hidden("data[" + i + "].TemplateLang", item.TemplateLang)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Translate)
-                            @Html.Hidden("data[" + i + "].Translate", item.Translate)
+                            @(isConfirmPage ? @Html.DisplayFor(modelItem => item.Translate) : @Html.TextBox("data[" + i + "].Translate", item.Translate, readOnlyAttrs))
                         </td>
                         <td>
                             @(isConfirmPage ? Html.DisplayFor(modelItem => item.NewTranslate) : Html.TextBox("data[" + i + "].NewTranslate", item.NewTranslate))
@@ -59,13 +59,13 @@ else
             if (isConfirmPage)
             {
                 string path = "/Home/Index/" + Model[0].TemplateLang;
-                <input id="Reset" type="button" value="Reset" onclick="javascript: window.location.href = '@path';" />
-                <input id="Back" type="button" value="Back" onclick="javascript: history.go(-1);" />
-                <input id="Confirm" type="submit" value="Confirm" />
+                <input id="Reset" type="button" value="Сбросить" onclick="javascript: window.location.href = '@path';" />
+                <input id="Back" type="button" value="Назад" onclick="javascript: history.go(-1);" />
+                <input id="Confirm" type="submit" value="Подтвердить" />
             }
             else
             {
-                <input id="Save" type="submit" value="Save" />
+                <input id="Save" type="submit" value="Сохранить" />
             }
         }
     </div>

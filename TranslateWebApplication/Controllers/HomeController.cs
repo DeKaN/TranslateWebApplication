@@ -100,7 +100,7 @@
         {
             if (data.Count == 0)
             {
-                ViewBag.Message = "Nothing changed";
+                ViewBag.Message = "Нет изменений";
                 return View();
             }
             var ids = data.Where(item => !string.IsNullOrWhiteSpace(item.NewTranslate)).Select(item => item.Id).ToList();
@@ -121,7 +121,7 @@
         {
             if (data.Count == 0)
             {
-                ViewBag.Message = "Nothing changed";
+                ViewBag.Message = "Нет изменений";
             }
             else
             {
@@ -134,7 +134,7 @@
                                   select new KeyedText { Key = key, Text = item.NewTranslate }).ToList();
                 var package = new KeyedTextPackage { KeyedTexts = keyedTexts };
                 var answer = serviceClient.UpdateOrCreateTranslateListByKey(Login, Password, configuration.GetInstance(), package, lang);
-                StringBuilder sb = new StringBuilder("Status: ");
+                StringBuilder sb = new StringBuilder("Статус: ");
                 sb.Append(answer.ErrorCode).Append(".\n");
                 if (answer.ErrorCode != GeneralErrorCode.Ok)
                 {
@@ -143,9 +143,9 @@
                 else
                 {
                     var result = answer.Result;
-                    sb.Append("Added: ")
+                    sb.Append("Добавлено: ")
                         .Append(result.AddedCount)
-                        .Append(". Edited: ")
+                        .Append(". Изменено: ")
                         .Append(result.EditedCount)
                         .Append(".");
                 }

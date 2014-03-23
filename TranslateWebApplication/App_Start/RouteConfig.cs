@@ -15,8 +15,8 @@ namespace TranslateWebApplication
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{language}",
-                defaults: new { controller = "Home", action = "Index", language = UrlParameter.Optional }
+                url: "{controller}/{action}/",
+                defaults: new { controller = "Home", action = "Index" }
             );
         }
     }

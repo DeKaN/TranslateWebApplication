@@ -4,4 +4,10 @@
     ViewBag.Title = "Result";
 }
 
+<script type="text/javascript">
+    window.setTimeout(function() {
+        window.location.href = '@Url.Action("Index", "Home", new { language = ViewBag.Language })';
+    }, 5000);
+</script>
+
 <div class="row">@ViewBag.Message</div>

@@ -125,8 +125,8 @@
             }
             else
             {
-
                 string lang = data[0].TemplateLang;
+                ViewBag.Language = lang;
                 string contextValue = configuration.GetImportPackage(Server).Context.Value;
                 var keyedTexts = (from item in data
                                   where item.IsChanged
